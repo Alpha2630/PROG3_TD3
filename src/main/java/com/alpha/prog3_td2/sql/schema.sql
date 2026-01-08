@@ -9,3 +9,4 @@ create table Player(id int primary key not null,
                     position player_position,
                     id_team int references Team(id)
 );
+

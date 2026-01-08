@@ -8,14 +8,30 @@ public class Player {
     private int age;
     private PositionEnum position;
     private Team team;
-    public String getTeamName();
+    private Integer goalNb;
 
-    public Player(int id, String name, int age, PositionEnum position, Team team) {
+    public Player() {
+    }
+
+    public Player(int id, String name, int age, PositionEnum position, Team team, Integer goalNb) {
         this.id = id;
         this.name = name;
         this.age = age;
         this.position = position;
         this.team = team;
+        this.goalNb = goalNb; 
+    }
+
+    public String getTeamName() {
+        return (team != null) ? team.getName() : null;
+    }
+
+    public Integer getGoalNb() {
+        return goalNb;
+    }
+
+    public void setGoalNb(Integer goalNb) {
+        this.goalNb = goalNb;
     }
 
     public int getId() {
@@ -56,28 +72,5 @@ public class Player {
 
     public void setTeam(Team team) {
         this.team = team;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (o == null || getClass() != o.getClass()) return false;
-        Player player = (Player) o;
-        return id == player.id && age == player.age && Objects.equals(name, player.name) && position == player.position && Objects.equals(team, player.team);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, name, age, position, team);
-    }
-
-    @Override
-    public String toString() {
-        return "Player{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", age=" + age +
-                ", position=" + position +
-                ", team=" + team +
-                '}';
     }
 }

@@ -8,13 +8,35 @@ public class Team {
     private String name;
     private ContinentEnum continent;
     private List<Player> players;
-    public Integer getPlayersCount();
+    public Team() {
+    }
 
     public Team(int id, String name, ContinentEnum continent, List<Player> players) {
         this.id = id;
         this.name = name;
         this.continent = continent;
         this.players = players;
+    }
+    public Integer getPlayersCount() {
+        return (players != null) ? players.size() : 0;
+    }
+    public Integer getPlayersGoals() {
+        if (players == null) {
+            return 0;
+        }
+
+        int total = 0;
+
+        for (Player player : players) {
+            if (player.getGoalNb() == null) {
+                throw new RuntimeException(
+                        "Nombre de buts du joueur " + player.getName() + " inconnu"
+                );
+            }
+            total += player.getGoalNb();
+        }
+
+        return total;
     }
 
     public int getId() {
@@ -47,27 +69,5 @@ public class Team {
 
     public void setPlayers(List<Player> players) {
         this.players = players;
-    }
-
-    @Override
-    public boolean equals(Object o) {
-        if (o == null || getClass() != o.getClass()) return false;
-        Team team = (Team) o;
-        return id == team.id && Objects.equals(name, team.name) && continent == team.continent && Objects.equals(players, team.players);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(id, name, continent, players);
-    }
-
-    @Override
-    public String toString() {
-        return "Team{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", continent=" + continent +
-                ", players=" + players +
-                '}';
     }
 }
